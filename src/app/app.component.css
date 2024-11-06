@@ -1,0 +1,44 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 20px 30px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .logo-izquierdo {
+    margin-right: auto;
+    height: 70px;
+  }
+  
+  .logo-derecho {
+    margin-left: auto;
+    height: 70px;
+  }
+  
+  .titulo {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 400;
+    color: #333;
+    margin: 0 10px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .description {
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    color: #666;
+    margin: 15px 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  hr {
+    margin: 0;
+    opacity: 0.4;
+    border-color: #333;
+    border-width: 1px;
+  }
+  
