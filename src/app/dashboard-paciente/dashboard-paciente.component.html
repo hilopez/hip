@@ -1,0 +1,24 @@
+<div class="dashboard-container">
+    <h2 class="dashboard-title">Dashboard Paciente</h2>
+  
+    <div *ngIf="cuestionarios.length > 0">
+      <h3 class="section-title">Cuestionarios Disponibles</h3>
+      <ul class="list">
+        <li *ngFor="let cuestionario of cuestionarios" class="list-item">
+          <p class="item-name">{{ cuestionario.nombre }}</p>
+          <button class="action-button" (click)="rellenarCuestionario(cuestionario.id)">Rellenar</button>
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="resultados.length > 0">
+      <h3 class="section-title">Resultados</h3>
+      <ul class="list">
+        <li *ngFor="let resultado of resultados" class="list-item">
+          <p>{{ resultado.fecha }} - {{ resultado.estado }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  

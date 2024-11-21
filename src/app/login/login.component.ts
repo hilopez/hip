@@ -5,26 +5,40 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  email: string =  '';
-  password: string =  '';
+  email: string = '';
+  password: string = '';
+  codigoCentro: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
-    this.http.post('http://138.4.10.37:8081/api/login/', { email: this.email, password: this.password })
-      .subscribe(
-        (response: any) => {
-          localStorage.setItem('token', response.access);
-          this.router.navigate(['/dashboard']);  // Ajusta la ruta según tu aplicación
-        },
-        error => {
-          this.password = '';
-          alert('Usuario o contraseña incorrectos.');
-          console.error('Login error', error);
+    const loginData = {
+      email: this.email,
+      password: this.password,
+      codigoCentro: this.codigoCentro,
+    };
+
+    this.http.post('http://tu-api.com/login', loginData).subscribe(
+      (response: any) => {
+        // Guardar token y rol en localStorage
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.role);
+        localStorage.setItem('codigoCentro', this.codigoCentro);
+
+        // Redirigir a dashboard según el rol
+        if (response.role === 'Paciente') {
+          this.router.navigate(['/dashboard-paciente']);
+        } else if (response.role === 'Doctor') {
+          this.router.navigate(['/dashboard-doctor']);
         }
-      );
+      },
+      (error) => {
+        alert('Usuario o contraseña incorrectos.');
+        console.error('Login error', error);
+      }
+    );
   }
 }

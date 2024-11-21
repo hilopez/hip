@@ -1,71 +1,102 @@
+/* Contenedor principal del login */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #ffffff;
-  }
-  
-  .login-box {
-    background: #fafafa;
+    background-color: #ffe3ed; /* Fondo en un tono rosa suave */
+}
+
+/* Caja del formulario de login */
+.login-box {
+    background: #ffffff;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     max-width: 400px;
     width: 100%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-title {
-    color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+}
+
+/* Título del login */
+.login-title {
+    color: #c2185b; /* Rosa oscuro */
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: 600;
-  }
-  
-  .full-width mat-form-field {
+}
+
+/* Estilo de los campos del formulario */
+.full-width mat-form-field {
     width: 100%;
-  }
-  
-  .full-width {
+    margin-bottom: 20px;
+}
+
+.full-width {
     width: 100%;
-  }
-  
-  .login-options {
+}
+
+/* Opciones de login */
+.login-options {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-  
-  .forgot-password {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .forgot-password:hover {
-    text-decoration: underline;
-  }
-  
-  .login-button {
+    justify-content: center;
+    margin-bottom: 10px;
+    color: #757575; /* Gris suave */
+    font-size: 14px;
+}
+
+/* Botón de inicio de sesión */
+.login-button {
     width: 100%;
-    margin-top: 12px;
-    background-color: #e74c3c !important;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .register-link {
-    margin-top: 12px;
-    color: #333;
-  }
-  
-  .register-link a {
-    color: #e74c3c;
+    height: 40px;
+    font-size: 16px;
+    background-color: #c2185b; /* Rosa oscuro */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #ad1457; /* Rosa más oscuro al pasar el cursor */
+}
+
+/* Enlace de registro */
+.register-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #c2185b;
+}
+
+.register-link a {
     text-decoration: none;
-  }
-  
-  .register-link a:hover {
+    font-weight: 600;
+    color: #ad1457;
+}
+
+.register-link a:hover {
     text-decoration: underline;
-  }
-  
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+    .login-box {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .login-title {
+        font-size: 20px;
+    }
+}
+
+/* Estilo para el selector de rol (mat-select) */
+mat-select {
+    text-align: left;
+    margin-bottom: 15px; /* Espacio adicional debajo del selector */
+}
+
+mat-option {
+    color: #333333; /* Color del texto en las opciones */
+}
