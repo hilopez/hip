@@ -6,10 +6,15 @@
       <ul class="list">
         <li *ngFor="let paciente of pacientes" class="list-item">
           <p class="item-name">{{ paciente.nombre }} - {{ paciente.estado }}</p>
-          <button class="action-button" (click)="verDetallePaciente(paciente.id)">Ver Detalles</button>
+          <button class="action-button" (click)="verDetallePaciente(paciente.id)">
+            Ver Detalles
+          </button>
         </li>
       </ul>
     </div>
-  </div>
   
+    <div *ngIf="pacientes.length === 0">
+      <p>No hay pacientes disponibles.</p>
+    </div>
+  </div>
   

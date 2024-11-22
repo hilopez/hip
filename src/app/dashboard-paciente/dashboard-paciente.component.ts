@@ -13,13 +13,29 @@ export class DashboardPacienteComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.apiService.obtenerCuestionarios().subscribe((data) => {
-      this.cuestionarios = data;
-    });
+    // Cargar cuestionarios
+    this.apiService.obtenerCuestionarios().subscribe(
+      (data) => {
+        this.cuestionarios = data || []; // Asegurarse de que siempre sea un array
+      },
+      (error) => {
+        console.error('Error al cargar cuestionarios:', error);
+      }
+    );
 
-    this.apiService.obtenerResultados().subscribe((data) => {
-      this.resultados = data;
-    });
+    // Cargar resultados
+    this.apiService.obtenerResultados().subscribe(
+      (data) => {
+        this.resultados = data || []; // Asegurarse de que siempre sea un array
+      },
+      (error) => {
+        console.error('Error al cargar resultados:', error);
+      }
+    );
+  }
+
+  rellenarCuestionario(cuestionarioId: number): void {
+    alert(`Rellenando cuestionario con ID: ${cuestionarioId}`);
+    // Aquí puedes añadir lógica para redirigir a un formulario o similar
   }
 }
-
