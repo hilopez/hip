@@ -1,20 +1,18 @@
 <div class="register-container">
   <div class="register-box">
     <h2>Registro</h2>
-    <form (ngSubmit)="onSubmit()">
+    <form (submit)="register()">
       <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" [(ngModel)]="email" name="email" required>
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput [(ngModel)]="email" name="email" required />
       </mat-form-field>
-
       <mat-form-field class="full-width">
         <mat-label>Contraseña</mat-label>
-        <input matInput type="password" [(ngModel)]="password" name="password" required>
+        <input matInput type="password" [(ngModel)]="password" name="password" required />
       </mat-form-field>
-
       <mat-form-field class="full-width">
-        <mat-label>Código del Centro</mat-label>
-        <input matInput type="text" [(ngModel)]="codigoCentro" name="codigoCentro" required>
+        <mat-label>Confirmar contraseña</mat-label>
+        <input matInput type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required />
       </mat-form-field>
 
       <mat-form-field class="full-width">
@@ -25,7 +23,37 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit">Registrar</button>
+      <!-- Campos específicos para paciente -->
+      <div *ngIf="role === 'Paciente'">
+        <mat-form-field class="full-width">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input matInput type="date" [(ngModel)]="dateOfBirth" name="dateOfBirth" required />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Género</mat-label>
+          <mat-select [(ngModel)]="gender" name="gender" required>
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Otro">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Campos específicos para doctor -->
+      <div *ngIf="role === 'Doctor'">
+        <mat-form-field class="full-width">
+          <mat-label>Código de centro</mat-label>
+          <input matInput [(ngModel)]="centerCode" name="centerCode" required />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Centro médico</mat-label>
+          <mat-select [(ngModel)]="centerCode" name="centerCode" required>
+            <mat-option *ngFor="let center of centers" [value]="center">{{ center }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button type="submit" class="register-button">Registrar</button>
     </form>
   </div>
 </div>

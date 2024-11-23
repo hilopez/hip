@@ -1,36 +1,44 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   email: string = '';
   password: string = '';
-  codigoCentro: string = '';
-  role: string = 'Paciente';
+  confirmPassword: string = '';
+  role: string = 'Paciente'; // Default role
+  dateOfBirth: string = '';
+  gender: string = '';
+  centerCode: string = '';
+  centers: string[] = ['Centro 1', 'Centro 2', 'Centro 3']; // Simulación de centros médicos
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
-  onSubmit() {
-    const user = {
+  register() {
+    if (this.password !== this.confirmPassword) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
+    const userData = {
       email: this.email,
       password: this.password,
-      codigoCentro: this.codigoCentro,
       role: this.role,
+      dateOfBirth: this.role === 'Paciente' ? this.dateOfBirth : null,
+      gender: this.role === 'Paciente' ? this.gender : null,
+      centerCode: this.role === 'Doctor' ? this.centerCode : null
     };
 
-    this.http.post('http://tu-api.com/register', user).subscribe(
+    this.apiService.register(userData).subscribe(
       (response) => {
-        alert('Registro exitoso');
         this.router.navigate(['/login']);
       },
       (error) => {
         console.error('Error en el registro', error);
-        alert('Hubo un error en el registro');
       }
     );
   }

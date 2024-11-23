@@ -1,34 +1,23 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  codigoCentro: string = '';
+  errorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
-  onSubmit() {
-    const loginData = {
-      email: this.email,
-      password: this.password,
-      codigoCentro: this.codigoCentro,
-    };
-
-    this.http.post('http://tu-api.com/login', loginData).subscribe(
-      (response: any) => {
-        // Guardar token y rol en localStorage
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('role', response.role);
-        localStorage.setItem('codigoCentro', this.codigoCentro);
-
-        // Redirigir a dashboard según el rol
+  login() {
+    this.apiService.login(this.email, this.password).subscribe(
+      (response) => {
+        this.apiService.setCurrentUser(response);  // Guarda el usuario en el localStorage
         if (response.role === 'Paciente') {
           this.router.navigate(['/dashboard-paciente']);
         } else if (response.role === 'Doctor') {
@@ -36,9 +25,9 @@ export class LoginComponent {
         }
       },
       (error) => {
-        alert('Usuario o contraseña incorrectos.');
-        console.error('Login error', error);
+        this.errorMessage = 'Credenciales incorrectas';
       }
     );
   }
+  
 }
