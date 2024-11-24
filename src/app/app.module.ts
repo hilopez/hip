@@ -16,6 +16,7 @@ import { DashboardDoctorComponent } from './dashboard-doctor/dashboard-doctor.co
 import { ApiService } from './api.service';
 import { AuthGuard } from './auth.guard';
 import { appRoutes } from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { appRoutes } from './app.routes';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
