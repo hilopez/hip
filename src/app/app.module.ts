@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,7 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
@@ -37,7 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSelectModule,
     RouterModule.forRoot(appRoutes)  // Configuración de rutas
   ],
-  providers: [ApiService, AuthGuard],  // Servicios y guards
+  providers: [ApiService,provideHttpClient(), AuthGuard],  // Servicios y guards
   bootstrap: [AppComponent]
 })
 export class AppModule { }
