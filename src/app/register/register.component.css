@@ -1,5 +1,5 @@
 /* Contenedor principal del formulario de registro */
-.login-container {
+.register-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,7 @@
 }
 
 /* Caja del formulario de registro */
-.login-box {
+.register-box {
     background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 10px;
@@ -19,7 +19,7 @@
 }
 
 /* Título del registro */
-.login-title {
+.register-title {
     color: #d81b60; /* Tono rosa oscuro */
     margin-bottom: 20px;
     font-size: 24px;
@@ -38,7 +38,7 @@
 }
 
 /* Botón de registro */
-.login-button {
+.register-button {
     width: 100%;
     margin-top: 10px;
     background-color: #ec407a; /* Rosa para el botón */
@@ -49,35 +49,35 @@
 }
 
 /* Efecto hover para el botón */
-.login-button:hover {
+.register-button:hover {
     background-color: #d81b60; /* Rosa oscuro al hacer hover */
 }
 
-/* Enlace de login desde registro */
+/* Enlace de register desde registro */
 .register-link {
     margin-top: 10px;
     color: #ad1457; /* Tono rosa oscuro */
 }
 
-/* Estilo del enlace de login */
+/* Estilo del enlace de register */
 .register-link a {
     color: #ec407a; /* Rosa para el enlace */
     text-decoration: none;
 }
 
-/* Hover para el enlace de login */
+/* Hover para el enlace de register */
 .register-link a:hover {
     text-decoration: underline;
 }
 
 /* Responsive para pantallas pequeñas */
 @media (max-width: 600px) {
-    .login-box {
+    .register-box {
         padding: 15px;
         max-width: 90%;
     }
 
-    .login-title {
+    .register-title {
         font-size: 20px;
     }
 }
