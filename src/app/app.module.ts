@@ -17,6 +17,8 @@ import { ApiService } from './api.service';
 import { AuthGuard } from './auth.guard';
 import { appRoutes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomePacienteComponent } from './home-paciente/home-paciente.component';
+import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     DashboardPacienteComponent,
-    DashboardDoctorComponent
+    DashboardDoctorComponent,
+    HomePacienteComponent,
+    HomeDoctorComponent
   ],
   imports: [
     BrowserModule,
