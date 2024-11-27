@@ -37,6 +37,12 @@
             <mat-option value="Otro">Otro</mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Centro médico</mat-label>
+          <mat-select [(ngModel)]="centerCode" name="centerCode" required>
+            <mat-option *ngFor="let center of centers" [value]="center">{{ center }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <!-- Campos específicos para doctor -->
@@ -44,12 +50,6 @@
         <mat-form-field class="full-width">
           <mat-label>Código de centro</mat-label>
           <input matInput [(ngModel)]="centerCode" name="centerCode" required />
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Centro médico</mat-label>
-          <mat-select [(ngModel)]="centerCode" name="centerCode" required>
-            <mat-option *ngFor="let center of centers" [value]="center">{{ center }}</mat-option>
-          </mat-select>
         </mat-form-field>
       </div>
 
