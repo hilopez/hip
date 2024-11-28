@@ -6,16 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8000/api/users'; // URL del backend
+  private apiUrl = 'http://localhost:8000/api/'; // URL del backend
 
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login/`, { email, password });
+    return this.http.post<any>(`${this.apiUrl}users/login/`, { email, password });
   }
 
   register(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/`, userData);
+    return this.http.post<any>(`${this.apiUrl}users/`, userData);
   }
 
   getCurrentUser() {
@@ -29,5 +29,13 @@ export class ApiService {
 
   logout() {
     localStorage.removeItem('user');
+  }
+
+  getMedicalCenters(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}medical-centers/`);
+  }
+
+  getUsersByMedicalCenter(medical_center: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users/by_medical_center/${medical_center}`);
   }
 }

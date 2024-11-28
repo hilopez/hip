@@ -18,17 +18,17 @@ export class LoginComponent {
     this.apiService.login(this.email, this.password).subscribe(
       (response) => {
         this.apiService.setCurrentUser(response);  // Guarda el usuario en el localStorage
-        /*if (response.role === 'Paciente') {
+        if (response.rol === 'Paciente') {
           this.router.navigate(['/dashboard-paciente']);
-        } else if (response.role === 'Doctor') */
+        } else if (response.rol === 'Doctor')
          {
-          this.router.navigate(['/dashboard-doctor']);
-        } 
+          this.router.navigate(['/home-doctor']);
+        }
       },
       (error) => {
         this.errorMessage = 'Credenciales incorrectas';
       }
     );
   }
-  
+
 }
