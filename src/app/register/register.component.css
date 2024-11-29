@@ -40,8 +40,10 @@
 /* Botón de registro */
 .register-button {
     width: 100%;
-    margin-top: 20px;
+    height: 40px;
+    font-size: 16px;
     background-color: #ec407a; /* Rosa para el botón */
+    margin-top: 20px;
     color: white;
     border: none;
     border-radius: 5px;
