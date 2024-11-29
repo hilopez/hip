@@ -8,15 +8,14 @@ import {ApiService} from '../api.service';
 })
 export class HomeDoctorComponent implements OnInit {
   patients: any;
-  doctor_medical_center: string = "";
+  doctorId: string = "";
 
   constructor(private apiService: ApiService) {
   }
 
   ngOnInit(): void {
-    console.log("Hello")
-    this.doctor_medical_center = this.apiService.getCurrentUser().medical_center;
-    this.apiService.getUsersByMedicalCenter(this.doctor_medical_center).subscribe(
+    this.doctorId = this.apiService.getCurrentUser();
+    this.apiService.getUsersByMedicalCenter(this.doctorId).subscribe(
       (response) => {
         this.patients = response;
         console.log(this.patients);

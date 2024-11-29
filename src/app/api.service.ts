@@ -22,8 +22,13 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}users/register/doctor/`, userData);
   }
 
-  getCurrentUser() {
-    return localStorage.getItem('userId');
+  getCurrentUser(): string {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      return userId;
+    } else {
+      return "";
+    }
   }
 
   setCurrentUser(userId: string) {
