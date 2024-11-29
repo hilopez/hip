@@ -23,12 +23,11 @@ export class ApiService {
   }
 
   getCurrentUser() {
-    // Recupera el usuario de localStorage o sessionStorage
-    return JSON.parse(localStorage.getItem('user') || '{}');
+    return localStorage.getItem('userId');
   }
 
-  setCurrentUser(user: any) {
-    localStorage.setItem('user', JSON.stringify(user));
+  setCurrentUser(userId: string) {
+    localStorage.setItem('userId', userId);
   }
 
   logout() {

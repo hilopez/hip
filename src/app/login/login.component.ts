@@ -15,18 +15,19 @@ export class LoginComponent {
   constructor(private apiService: ApiService, private router: Router) {}
 
   login() {
+    this.errorMessage = "";
     this.apiService.login(this.email, this.password).subscribe(
       (response) => {
-        this.apiService.setCurrentUser(response);  // Guarda el usuario en el localStorage
+        this.apiService.setCurrentUser(response.id);
         if (response.rol === 'Paciente') {
-          this.router.navigate(['/dashboard-paciente']);
+          this.router.navigate(['/dashboard-paciente']).then();
         } else if (response.rol === 'Doctor')
          {
-          this.router.navigate(['/home-doctor']);
+          this.router.navigate(['/home-doctor']).then();
         }
       },
       (error) => {
-        this.errorMessage = 'Credenciales incorrectas';
+        this.errorMessage = error.error.message;
       }
     );
   }
