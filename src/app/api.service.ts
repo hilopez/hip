@@ -14,8 +14,12 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}users/login/`, { email, password });
   }
 
-  register(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}users/`, userData);
+  registerPatient(userData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}users/register/patient/`, userData);
+  }
+
+  registerDoctor(userData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}users/register/doctor/`, userData);
   }
 
   getCurrentUser() {
