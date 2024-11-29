@@ -43,6 +43,10 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}medical-centers/`);
   }
 
+  getUserById(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users/${userId}/`);
+  }
+
   getUsersByMedicalCenter(medical_center: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}users/by_medical_center/${medical_center}`);
   }

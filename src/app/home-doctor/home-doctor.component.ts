@@ -15,15 +15,14 @@ export class HomeDoctorComponent implements OnInit {
 
   ngOnInit(): void {
     this.doctorId = this.apiService.getCurrentUser();
-    this.apiService.getUsersByMedicalCenter(this.doctorId).subscribe(
+    this.apiService.getUserById(this.doctorId).subscribe(
       (response) => {
-        this.patients = response;
-        console.log(this.patients);
-      },
-      (error) => {
-        console.error('Error en el registro', error);
+        this.apiService.getUsersByMedicalCenter(response.medical_center).subscribe(
+          (response) => {
+            this.patients = response;
+          }
+        );
       }
     );
   }
-
 }
