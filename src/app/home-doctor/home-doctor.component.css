@@ -1,0 +1,23 @@
+.nav-container {
+  padding: 20px;
+  background-color: #ffe3ed; /* Fondo rosa suave */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.content-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 85%;
+}
+
+.patient-info {
+  margin: 10px;
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}

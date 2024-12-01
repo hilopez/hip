@@ -19,6 +19,9 @@ import { appRoutes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomePacienteComponent } from './home-paciente/home-paciente.component';
 import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatSnackBarModule,
     RouterModule.forRoot(appRoutes)  // Configuración de rutas
   ],
   providers: [ApiService,provideHttpClient(), AuthGuard],  // Servicios y guards
