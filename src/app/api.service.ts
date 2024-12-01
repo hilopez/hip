@@ -62,4 +62,26 @@ export class ApiService {
   getCountUsersByMedicalCenterSearch(medical_center: string, patientEmail: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}users/count_by_medical_center_search/${medical_center}/?search_email=${patientEmail}`);
   }
+
+  getAllQuestionaires(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}questionnaires/`);
+  }
+
+  getQuestionairesByPatientId(patientId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users-questionnaires/user/${patientId}/`);
+  }
+
+  getQuestionairesByMyPatient(): Observable<any> {
+    let patientId = localStorage.getItem('userId');
+    return this.http.get<any>(`${this.apiUrl}users-questionnaires/user/${patientId}/`);
+  }
+
+  getPatientById(patientId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users/${patientId}/`);
+  }
+
+  getMyPatient(): Observable<any> {
+    let patientId = localStorage.getItem('userId');
+    return this.http.get<any>(`${this.apiUrl}users/${patientId}/`);
+  }
 }

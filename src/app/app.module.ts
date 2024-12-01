@@ -22,6 +22,8 @@ import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DashboardInfoPacienteComponent } from './dashboard-info-paciente/dashboard-info-paciente.component';
+import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     DashboardPacienteComponent,
     DashboardDoctorComponent,
     HomePacienteComponent,
-    HomeDoctorComponent
+    HomeDoctorComponent,
+    DashboardInfoPacienteComponent,
+    QuestionnaireComponent
   ],
   imports: [
     BrowserModule,

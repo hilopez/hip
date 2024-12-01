@@ -1,28 +1,33 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '../api.service';
 import {lastValueFrom} from 'rxjs';
 
 @Component({
-  selector: 'app-dashboard-paciente',
-  templateUrl: './dashboard-paciente.component.html',
-  styleUrls: ['./dashboard-paciente.component.css']
+  selector: 'app-dashboard-info-paciente',
+  templateUrl: './dashboard-info-paciente.component.html',
+  styleUrl: './dashboard-info-paciente.component.css'
 })
-export class DashboardPacienteComponent implements OnInit{
+export class DashboardInfoPacienteComponent implements OnInit{
+  patientId: string;
   patient: { id: string, email: string };
   questionaires: Array<any> = [];
   questionairesDone: Array<any> = [];
 
-  constructor(private apiService: ApiService) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+    this.patientId = "";
     this.patient = {id: "", email: ""};
   }
   async ngOnInit(): Promise<void> {
-    const getPatientByIdResponse = this.apiService.getMyPatient();
+    this.patientId = this.route.snapshot.params['idPatient'];
+
+    const getPatientByIdResponse = this.apiService.getPatientById(this.patientId);
     this.patient = await lastValueFrom(getPatientByIdResponse);
 
     const getQuestionnairesResponse = this.apiService.getAllQuestionaires();
     this.questionaires = await lastValueFrom(getQuestionnairesResponse);
 
-    const getQuestionnairesDoneResponse = this.apiService.getQuestionairesByMyPatient();
+    const getQuestionnairesDoneResponse = this.apiService.getQuestionairesByPatientId(this.patientId);
     this.questionairesDone = await lastValueFrom(getQuestionnairesDoneResponse);
 
     this.questionaires.forEach(questionnaire => {
@@ -31,4 +36,5 @@ export class DashboardPacienteComponent implements OnInit{
       questionnaire.done = !!questionnaireDone;
     })
   }
+
 }

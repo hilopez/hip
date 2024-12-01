@@ -21,6 +21,12 @@
     <div>
       <div *ngFor="let patient of patients" class="patient-info">
         <p style="margin: 0">{{patient.email}}</p>
+        <div>
+          <p>a</p>
+        </div>
+        <button mat-icon-button matSuffix [routerLink]="['/dashboard-info-paciente', patient.id]" style="border: 0;">
+          <mat-icon>arrow_right_alt</mat-icon>
+        </button>
       </div>
     </div>
     <mat-paginator
