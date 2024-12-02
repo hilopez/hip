@@ -1,1 +1,36 @@
-<p>questionnaire works!</p>
+<div style="height: 100%">
+  <div class="nav-container">
+    <h3>{{questionaire.title}}</h3>
+  </div>
+  <div *ngFor="let question of questions" [ngClass]="{'patient-info': question.type_question === '0-5' || question.type_question === '0-3', 'patient-info-vertical': question.type_question === 'Input-User'}">
+    <p style="margin: 0">{{question.text}}</p>
+    <div>
+      <ng-container *ngIf="question.type_question === '0-5' || question.type_question === '0-3'; else elseTemplate">
+        <div style="display: flex; justify-content: space-between">
+          <p style="margin: 0">Value</p>
+          <p style="margin: 0">{{slider.value}}</p>
+        </div>
+        <mat-slider
+          class="example-margin"
+          [max]="question.type_question === '0-5' ? 5 : 3"
+          [min]="0"
+          [discrete]="true">
+          <input matSliderThumb [(ngModel)]="question.answer" #slider>
+        </mat-slider>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Respuesta {{question.order}}</mat-label>
+          <input matInput [(ngModel)]="question.answer"/>
+        </mat-form-field>
+      </ng-template>
+    </div>
+    <p style="margin: 0">{{question.hint}}</p>
+  </div>
+  <div style="display: flex; justify-content: center">
+    <button mat-flat-button (click)="finishQuestionnaire()">Terminar cuestionario</button>
+  </div>
+  <div style="margin: 10px">
+    <button mat-flat-button (click)="navigateBack()">Regresar</button>
+  </div>
+</div>

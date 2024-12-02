@@ -15,5 +15,5 @@ export const appRoutes: Routes = [
   { path: 'home-doctor', component: HomeDoctorComponent, canActivate: [AuthGuard] },
   { path: 'dashboard-info-paciente/:idPatient', component: DashboardInfoPacienteComponent, canActivate: [AuthGuard] },
   { path: 'dashboard-paciente', component: DashboardPacienteComponent, canActivate: [AuthGuard] },
-  { path: 'questionnaire/:idQuestionnaire/:idPatient', component: QuestionnaireComponent, canActivate: [AuthGuard] }
+  { path: 'questionnaire/:idQuestionnaire/:idPatient/:role', component: QuestionnaireComponent, canActivate: [AuthGuard] }
 ];

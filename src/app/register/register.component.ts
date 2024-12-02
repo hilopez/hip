@@ -8,6 +8,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit{
+  name: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
@@ -37,6 +38,7 @@ export class RegisterComponent implements OnInit{
     }
 
     const userData = {
+      name: this.name,
       email: this.email,
       password: this.password,
       rol: this.role,

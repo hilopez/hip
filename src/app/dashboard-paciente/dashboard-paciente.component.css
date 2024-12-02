@@ -1,4 +1,12 @@
-.patient-info {
+.nav-container {
+  padding: 20px;
+  background-color: #ffe3ed; /* Fondo rosa suave */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.patient-questionnaires {
   margin: 10px;
   background-color: lightgray;
   padding: 10px;

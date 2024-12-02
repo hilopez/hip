@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class HomeDoctorComponent implements OnInit {
   patients: any;
-  patientEmail: string = "";
+  patientName: string = "";
   doctorId: string = "";
   medicalCenterId: string = "";
   patientsSize: number = 0;
@@ -49,13 +49,13 @@ export class HomeDoctorComponent implements OnInit {
 
   searchPatients(page: number, firstRequest: boolean) {
     if (firstRequest) {
-      this.apiService.getCountUsersByMedicalCenterSearch(this.medicalCenterId, this.patientEmail).subscribe(
+      this.apiService.getCountUsersByMedicalCenterSearch(this.medicalCenterId, this.patientName).subscribe(
         (response) => {
           this.patientsSize = response.count;
         }
       );
     }
-    this.apiService.getUsersByMedicalCenterPaginatedSearch(this.medicalCenterId, page, this.patientEmail).subscribe(
+    this.apiService.getUsersByMedicalCenterPaginatedSearch(this.medicalCenterId, page, this.patientName).subscribe(
       (response) => {
         this.patients = response;
       }
@@ -63,7 +63,7 @@ export class HomeDoctorComponent implements OnInit {
   }
 
   searchPatient() {
-    if (this.patientEmail != "") {
+    if (this.patientName != "") {
       this.pageIndex = 0;
       this.searchingMode = true;
       this.searchPatients(0, true);
@@ -76,7 +76,7 @@ export class HomeDoctorComponent implements OnInit {
     if (this.searchingMode) {
       this.pageIndex = 0;
       this.searchingMode = false;
-      this.patientEmail = "";
+      this.patientName = "";
       this.refreshPatients(0, true);
     }
   }

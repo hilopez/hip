@@ -3,6 +3,10 @@
     <h2>Registro</h2>
     <form (submit)="register()">
       <mat-form-field class="full-width">
+        <mat-label>Nombre Completo</mat-label>
+        <input matInput [(ngModel)]="name" name="name" required />
+      </mat-form-field>
+      <mat-form-field class="full-width">
         <mat-label>Correo electrónico</mat-label>
         <input matInput [(ngModel)]="email" name="email" required />
       </mat-form-field>

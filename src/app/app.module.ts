@@ -24,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DashboardInfoPacienteComponent } from './dashboard-info-paciente/dashboard-info-paciente.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
     MatPaginatorModule,
     MatIconModule,
     MatSnackBarModule,
+    MatSliderModule,
     RouterModule.forRoot(appRoutes)  // Configuración de rutas
   ],
   providers: [ApiService,provideHttpClient(), AuthGuard],  // Servicios y guards

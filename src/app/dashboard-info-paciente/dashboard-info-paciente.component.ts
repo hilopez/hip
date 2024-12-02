@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../api.service';
 import {lastValueFrom} from 'rxjs';
 
@@ -10,13 +10,14 @@ import {lastValueFrom} from 'rxjs';
 })
 export class DashboardInfoPacienteComponent implements OnInit{
   patientId: string;
-  patient: { id: string, email: string };
+  patient: { id: string, name: string };
   questionaires: Array<any> = [];
   questionairesDone: Array<any> = [];
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService,
+              private router: Router) {
     this.patientId = "";
-    this.patient = {id: "", email: ""};
+    this.patient = {id: "", name: ""};
   }
   async ngOnInit(): Promise<void> {
     this.patientId = this.route.snapshot.params['idPatient'];
@@ -31,10 +32,13 @@ export class DashboardInfoPacienteComponent implements OnInit{
     this.questionairesDone = await lastValueFrom(getQuestionnairesDoneResponse);
 
     this.questionaires.forEach(questionnaire => {
-      let questionnaireDone = this.questionairesDone.find((questionnaireDone) => questionnaire.id === questionnaireDone.id);
+      let questionnaireDone = this.questionairesDone.find((questionnaireDone) => questionnaire.id === questionnaireDone.questionnaire);
 
       questionnaire.done = !!questionnaireDone;
     })
   }
 
+  navigateBack() {
+    this.router.navigate(['/home-doctor']).then();
+  }
 }

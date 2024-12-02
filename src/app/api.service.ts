@@ -55,12 +55,12 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}users/count_by_medical_center/${medical_center}/`);
   }
 
-  getUsersByMedicalCenterPaginatedSearch(medical_center: string, page: number, patientEmail: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}users/by_medical_center_paginated_search/${medical_center}/?page=${page}&search_email=${patientEmail}`);
+  getUsersByMedicalCenterPaginatedSearch(medical_center: string, page: number, patientName: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users/by_medical_center_paginated_search/${medical_center}/?page=${page}&search_name=${patientName}`);
   }
 
-  getCountUsersByMedicalCenterSearch(medical_center: string, patientEmail: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}users/count_by_medical_center_search/${medical_center}/?search_email=${patientEmail}`);
+  getCountUsersByMedicalCenterSearch(medical_center: string, patientName: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users/count_by_medical_center_search/${medical_center}/?search_name=${patientName}`);
   }
 
   getAllQuestionaires(): Observable<any> {
@@ -83,5 +83,17 @@ export class ApiService {
   getMyPatient(): Observable<any> {
     let patientId = localStorage.getItem('userId');
     return this.http.get<any>(`${this.apiUrl}users/${patientId}/`);
+  }
+
+  getQuestionaireById(questionnaireId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}questionnaires/${questionnaireId}/`);
+  }
+
+  getQuestionsByQuestionnaireId(questionnaireId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}questions/questionnaire/${questionnaireId}/`);
+  }
+
+  createUserQuestionnaire(userQuestionnaireData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}users-questionnaires/`, userQuestionnaireData);
   }
 }

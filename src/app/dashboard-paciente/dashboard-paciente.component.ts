@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
 import {lastValueFrom} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-paciente',
@@ -8,12 +9,12 @@ import {lastValueFrom} from 'rxjs';
   styleUrls: ['./dashboard-paciente.component.css']
 })
 export class DashboardPacienteComponent implements OnInit{
-  patient: { id: string, email: string };
+  patient: { id: string, name: string };
   questionaires: Array<any> = [];
   questionairesDone: Array<any> = [];
 
-  constructor(private apiService: ApiService) {
-    this.patient = {id: "", email: ""};
+  constructor(private apiService: ApiService, private router: Router) {
+    this.patient = {id: "", name: ""};
   }
   async ngOnInit(): Promise<void> {
     const getPatientByIdResponse = this.apiService.getMyPatient();
@@ -26,9 +27,14 @@ export class DashboardPacienteComponent implements OnInit{
     this.questionairesDone = await lastValueFrom(getQuestionnairesDoneResponse);
 
     this.questionaires.forEach(questionnaire => {
-      let questionnaireDone = this.questionairesDone.find((questionnaireDone) => questionnaire.id === questionnaireDone.id);
+      let questionnaireDone = this.questionairesDone.find((questionnaireDone) => questionnaire.id === questionnaireDone.questionnaire);
 
       questionnaire.done = !!questionnaireDone;
     })
+  }
+
+  logout() {
+    this.apiService.logout();
+    this.router.navigate(['login']).then();
   }
 }
