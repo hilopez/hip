@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
   styleUrl: './home-doctor.component.css'
 })
 export class HomeDoctorComponent implements OnInit {
-  patients: any;
+  patients: Array<any> = [];
   patientName: string = "";
   doctorId: string = "";
   medicalCenterId: string = "";
@@ -41,8 +41,16 @@ export class HomeDoctorComponent implements OnInit {
       );
     }
     this.apiService.getUsersByMedicalCenterPaginated(this.medicalCenterId, page).subscribe(
-      (response) => {
+      async (response) => {
         this.patients = response;
+        if (this.patients.length > 0) {
+          for (const patient of this.patients) {
+            const getQuestionnairesDoneCountResponse = this.apiService.getQuestionairesCountUnDoneByPatientId(patient.id);
+            let getQuestionnairesDoneCount = await lastValueFrom(getQuestionnairesDoneCountResponse);
+
+            patient.undoneQuestionnaires = getQuestionnairesDoneCount.count < 4;
+          }
+        }
       }
     );
   }
@@ -56,8 +64,16 @@ export class HomeDoctorComponent implements OnInit {
       );
     }
     this.apiService.getUsersByMedicalCenterPaginatedSearch(this.medicalCenterId, page, this.patientName).subscribe(
-      (response) => {
+      async (response) => {
         this.patients = response;
+        if (this.patients.length > 0) {
+          for (const patient of this.patients) {
+            const getQuestionnairesDoneCountResponse = this.apiService.getQuestionairesCountUnDoneByPatientId(patient.id);
+            let getQuestionnairesDoneCount = await lastValueFrom(getQuestionnairesDoneCountResponse);
+
+            patient.undoneQuestionnaires = getQuestionnairesDoneCount.count < 4;
+          }
+        }
       }
     );
   }

@@ -28,7 +28,7 @@ export class DashboardInfoPacienteComponent implements OnInit{
     const getQuestionnairesResponse = this.apiService.getAllQuestionaires();
     this.questionaires = await lastValueFrom(getQuestionnairesResponse);
 
-    const getQuestionnairesDoneResponse = this.apiService.getQuestionairesByPatientId(this.patientId);
+    const getQuestionnairesDoneResponse = this.apiService.getQuestionairesUnDoneByPatientId(this.patientId);
     this.questionairesDone = await lastValueFrom(getQuestionnairesDoneResponse);
 
     this.questionaires.forEach(questionnaire => {
@@ -40,5 +40,17 @@ export class DashboardInfoPacienteComponent implements OnInit{
 
   navigateBack() {
     this.router.navigate(['/home-doctor']).then();
+  }
+
+  async newAttempt(questionnaireId: number) {
+    let questionnaire = this.questionaires.find(questionnaire => questionnaire.id === questionnaireId);
+    if (questionnaire) {
+      let new_questionnaire = { user: this.patientId, questionnaire: questionnaireId, new_attempt: true };
+
+      const getQuestionnairesDoneResponse = this.apiService.updateQuestionairesById(questionnaireId, new_questionnaire);
+      this.questionairesDone = await lastValueFrom(getQuestionnairesDoneResponse);
+
+      questionnaire.done = false;
+    }
   }
 }

@@ -5,14 +5,17 @@
   <div>
     <div *ngFor="let questionnaire of questionaires" class="patient-info">
       <p style="margin: 0">{{questionnaire.title}}</p>
-      <div *ngIf="questionnaire.done">
-        <p style="margin: 0">Hecho</p>
-      </div>
-      <div *ngIf="!questionnaire.done" style="display: flex; align-items: center">
-        <p style="margin: 0">Pendiente</p>
-        <button mat-icon-button matSuffix [routerLink]="['/questionnaire', questionnaire.id, patient.id, 'Doctor']" style="border: 0;">
-          <mat-icon>arrow_right_alt</mat-icon>
-        </button>
+      <div>
+        <div *ngIf="questionnaire.done"  style="display: flex; align-items: center">
+          <button mat-flat-button (click)="newAttempt(questionnaire.id)" style="margin-right: 10px">Nuevo Intento</button>
+          <p style="margin: 0">Hecho</p>
+        </div>
+        <div *ngIf="!questionnaire.done" style="display: flex; align-items: center">
+          <p style="margin: 0">Pendiente</p>
+          <button mat-icon-button matSuffix [routerLink]="['/questionnaire', questionnaire.id, patient.id, 'Doctor']" style="border: 0;">
+            <mat-icon>arrow_right_alt</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>

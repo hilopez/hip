@@ -67,8 +67,8 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}questionnaires/`);
   }
 
-  getQuestionairesByPatientId(patientId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}users-questionnaires/user/${patientId}/`);
+  getQuestionairesUnDoneByPatientId(patientId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users-questionnaires/user_undone/${patientId}/`);
   }
 
   getQuestionairesByMyPatient(): Observable<any> {
@@ -95,5 +95,13 @@ export class ApiService {
 
   createUserQuestionnaire(userQuestionnaireData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}users-questionnaires/`, userQuestionnaireData);
+  }
+
+  getQuestionairesCountUnDoneByPatientId(patientId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users-questionnaires/user_count_undone/${patientId}/`);
+  }
+
+  updateQuestionairesById(questionnaireId: number, questionnaireBody: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}users-questionnaires/${questionnaireId}/`, questionnaireBody);
   }
 }
