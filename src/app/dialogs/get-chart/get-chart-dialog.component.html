@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Gráfica de {{data.questionnaireName}}</h1>
+<div mat-dialog-content style="padding: 20px">
+  <ng-container *ngIf="questionnaires.length == 0; else elseTemplate">
+    <p>No hay datos que se puedan mostrar</p>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <canvasjs-chart [options]="chartOptions" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+  </ng-template>
+</div>

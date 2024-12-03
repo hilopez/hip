@@ -25,6 +25,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DashboardInfoPacienteComponent } from './dashboard-info-paciente/dashboard-info-paciente.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatDialogModule} from '@angular/material/dialog';
+import {GetChartDialogComponent} from './dialogs/get-chart/get-chart-dialog.component';
+import {CanvasJSAngularChartsModule} from '@canvasjs/angular-charts';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,8 @@ import {MatSliderModule} from '@angular/material/slider';
     HomePacienteComponent,
     HomeDoctorComponent,
     DashboardInfoPacienteComponent,
-    QuestionnaireComponent
+    QuestionnaireComponent,
+    GetChartDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +56,13 @@ import {MatSliderModule} from '@angular/material/slider';
     MatIconModule,
     MatSnackBarModule,
     MatSliderModule,
-    RouterModule.forRoot(appRoutes)  // Configuración de rutas
+    MatDialogModule,
+    RouterModule.forRoot(appRoutes),  // Configuración de rutas
+    CanvasJSAngularChartsModule
   ],
-  providers: [ApiService,provideHttpClient(), AuthGuard],  // Servicios y guards
+  providers: [ApiService,provideHttpClient(), AuthGuard,
+    DatePipe,
+    { provide: MAT_DATE_LOCALE, useValue: 'fr'},],  // Servicios y guards
   bootstrap: [AppComponent]
 })
 export class AppModule { }

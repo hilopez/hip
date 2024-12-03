@@ -31,6 +31,11 @@ export class QuestionnaireComponent implements OnInit {
 
     const getQuestionsByQuestionnaireIdResponse = this.apiService.getQuestionsByQuestionnaireId(this.questionnaireId);
     this.questions = await lastValueFrom(getQuestionsByQuestionnaireIdResponse);
+    this.questions.forEach(question => {
+      if (question.type_question == "Select") {
+        question.optionsSelect = question.options.split(',').map((opcion: string) => opcion.trim());
+      }
+    });
   }
 
   finishQuestionnaire() {
@@ -50,7 +55,7 @@ export class QuestionnaireComponent implements OnInit {
         score = this.calculateScoreQuestionnaire4();
       }
 
-      this.apiService.createUserQuestionnaire({user: this.patientId, questionnaire: this.questionnaireId, score: score}).subscribe(
+      /*this.apiService.createUserQuestionnaire({user: this.patientId, questionnaire: this.questionnaireId, score: score}).subscribe(
         () => {
           if (this.role == "Doctor") {
             this.router.navigate(['/dashboard-info-paciente', this.patientId]).then();
@@ -58,12 +63,16 @@ export class QuestionnaireComponent implements OnInit {
             this.router.navigate(['/dashboard-paciente']).then();
           }
         }
-      );
+      );*/
     }
   }
 
   calculateScoreQuestionnaire1 () {
-    return 5;
+    let suma = 0;
+    this.questions.forEach(question => {
+      suma += question.answer;
+    });
+    return suma;
   }
 
   calculateScoreQuestionnaire2 () {

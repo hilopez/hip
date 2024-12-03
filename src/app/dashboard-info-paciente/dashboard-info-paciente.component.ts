@@ -46,7 +46,6 @@ export class DashboardInfoPacienteComponent implements OnInit{
     let questionnaire = this.questionaires.find(questionnaire => questionnaire.id === questionnaireId);
     if (questionnaire) {
       let new_questionnaire = { user: this.patientId, questionnaire: questionnaireId, new_attempt: true };
-
       const getQuestionnairesDoneResponse = this.apiService.updateQuestionairesById(questionnaireId, new_questionnaire);
       this.questionairesDone = await lastValueFrom(getQuestionnairesDoneResponse);
 

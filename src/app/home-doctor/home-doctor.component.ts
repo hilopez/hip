@@ -15,6 +15,7 @@ export class HomeDoctorComponent implements OnInit {
   patientName: string = "";
   doctorId: string = "";
   medicalCenterId: string = "";
+  doctorName: string = "";
   patientsSize: number = 0;
   pageIndex: number = 0;
   searchingMode: boolean = false;
@@ -29,6 +30,7 @@ export class HomeDoctorComponent implements OnInit {
     const getUserByIdResponse = this.apiService.getUserById(this.doctorId);
     let getUserById = await lastValueFrom(getUserByIdResponse);
     this.medicalCenterId = getUserById.medical_center;
+    this.doctorName = getUserById.name;
     this.refreshPatients(0, true);
   }
 

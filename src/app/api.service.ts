@@ -104,4 +104,8 @@ export class ApiService {
   updateQuestionairesById(questionnaireId: number, questionnaireBody: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}users-questionnaires/${questionnaireId}/`, questionnaireBody);
   }
+
+  getQuestionairesByPatientId(patientId: string, questionnaireId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}users-questionnaires/user/${patientId}/questionnaire/${questionnaireId}`);
+  }
 }
