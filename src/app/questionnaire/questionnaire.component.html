@@ -2,14 +2,11 @@
   <div class="nav-container">
     <h3>{{questionaire.title}}</h3>
   </div>
-  <div *ngFor="let question of questions" [ngClass]="{'patient-info': question.type_question === '0-5' || question.type_question === '0-3', 'patient-info-vertical': question.type_question === 'Input-User' || question.type_question === 'Select'}">
+  <div *ngFor="let question of questions" class="patient-info">
     <p style="margin: 0">{{question.text}}</p>
     <div>
       <ng-container *ngIf="question.type_question === '0-5' || question.type_question === '0-3'; else elseTemplate">
-        <div style="display: flex; justify-content: space-between">
-          <p style="margin: 0">Value</p>
-          <p style="margin: 0">{{slider.value}}</p>
-        </div>
+        <p style="margin: 0 10px 0 0">Respuesta {{slider.value}}</p>
         <mat-slider
           class="example-margin"
           [max]="question.type_question === '0-5' ? 5 : 3"
@@ -22,14 +19,14 @@
         <ng-container *ngIf="question.type_question === 'Input-User'; else elseTemplate2">
           <mat-form-field appearance="outline" subscriptSizing="dynamic">
             <mat-label>Respuesta {{question.order}}</mat-label>
-            <input matInput [(ngModel)]="question.answer"/>
+            <input matInput [(ngModel)]="question.answer" type="number" autocomplete="off"/>
           </mat-form-field>
         </ng-container>
         <ng-template #elseTemplate2>
           <mat-form-field appearance="outline" subscriptSizing="dynamic">
             <mat-label>Respuesta {{question.order}}</mat-label>
             <mat-select [(value)]="question.answer">
-              <mat-option *ngFor="let option of question.optionsSelect" [value]="option">
+              <mat-option *ngFor="let option of question.optionsSelect; let i = index" [value]="i">
                 {{option}}
               </mat-option>
             </mat-select>

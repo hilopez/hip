@@ -45,7 +45,8 @@ export class DashboardPacienteComponent implements OnInit{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       questionnaireName: questionnaire.title,
-      questionnaireId: questionnaire.id
+      questionnaireId: questionnaire.id,
+      role: "Patient"
     }
 
     this.dialog.open(GetChartDialogComponent, dialogConfig);

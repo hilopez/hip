@@ -14,12 +14,35 @@ export class GetChartDialogComponent implements OnInit{
   patientId: string = "";
   questionnaires: Array<any> = [];
   dps: { label: string, y: number }[] = [];
+  dps2: { label: string, y: number }[] = [];
 
   chart: any;
   chartOptions = {
     data: [{
       type: "column",
       dataPoints: this.dps
+    }]
+  }
+
+  chartOptions2 = {
+    axisY: {
+      title: "Escala de Ansiedad"
+    },
+    axisY2: {
+      title: "Escala de Depresion"
+    },
+    toolTip: {
+      shared: true
+    },
+    data: [{
+      type: "column",
+      name: "Ansiedad",
+      dataPoints: this.dps
+    }, {
+      type: "column",
+      name: "Depresion",
+      axisYType: "secondary",
+      dataPoints: this.dps2
     }]
   }
 
@@ -30,7 +53,11 @@ export class GetChartDialogComponent implements OnInit{
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.patientId = this.apiService.getCurrentUser();
+    if (this.data.role == "Patient") {
+      this.patientId = this.apiService.getCurrentUser();
+    } else {
+      this.patientId = this.data.patientId;
+    }
 
     const getQuestionnairesByPatientIdResponse = this.apiService.getQuestionairesByPatientId(this.patientId, this.data.questionnaireId);
     this.questionnaires = await lastValueFrom(getQuestionnairesByPatientIdResponse);
@@ -41,6 +68,12 @@ export class GetChartDialogComponent implements OnInit{
           label: date,
           y: questionnaire.score
         });
+        if (this.data.questionnaireId == "3") {
+          this.dps2.push({
+            label: date,
+            y: questionnaire.score2
+          });
+        }
       }
     });
 

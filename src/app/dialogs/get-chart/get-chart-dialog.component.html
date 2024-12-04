@@ -4,6 +4,11 @@
     <p>No hay datos que se puedan mostrar</p>
   </ng-container>
   <ng-template #elseTemplate>
-    <canvasjs-chart [options]="chartOptions" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+    <ng-container *ngIf="this.data.questionnaireId == '3'; else elseTemplate2">
+      <canvasjs-chart [options]="chartOptions2" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+    </ng-container>
+    <ng-template #elseTemplate2>
+      <canvasjs-chart [options]="chartOptions" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+    </ng-template>
   </ng-template>
 </div>

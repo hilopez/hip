@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../api.service';
 import {lastValueFrom} from 'rxjs';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {GetChartDialogComponent} from '../dialogs/get-chart/get-chart-dialog.component';
 
 @Component({
   selector: 'app-dashboard-info-paciente',
@@ -15,7 +17,7 @@ export class DashboardInfoPacienteComponent implements OnInit{
   questionairesDone: Array<any> = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,
-              private router: Router) {
+              private router: Router, private dialog: MatDialog) {
     this.patientId = "";
     this.patient = {id: "", name: ""};
   }
@@ -45,11 +47,23 @@ export class DashboardInfoPacienteComponent implements OnInit{
   async newAttempt(questionnaireId: number) {
     let questionnaire = this.questionaires.find(questionnaire => questionnaire.id === questionnaireId);
     if (questionnaire) {
-      let new_questionnaire = { user: this.patientId, questionnaire: questionnaireId, new_attempt: true };
-      const getQuestionnairesDoneResponse = this.apiService.updateQuestionairesById(questionnaireId, new_questionnaire);
+      let new_questionnaire = { user_id: this.patientId, questionnaire_id: questionnaireId };
+      const getQuestionnairesDoneResponse = this.apiService.updateQuestionairesById(new_questionnaire);
       this.questionairesDone = await lastValueFrom(getQuestionnairesDoneResponse);
 
       questionnaire.done = false;
     }
+  }
+
+  seeChart(questionnaire: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      questionnaireName: questionnaire.title,
+      questionnaireId: questionnaire.id,
+      role: "Doctor",
+      patientId: this.patientId
+    }
+
+    this.dialog.open(GetChartDialogComponent, dialogConfig);
   }
 }

@@ -101,8 +101,8 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}users-questionnaires/user_count_undone/${patientId}/`);
   }
 
-  updateQuestionairesById(questionnaireId: number, questionnaireBody: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}users-questionnaires/${questionnaireId}/`, questionnaireBody);
+  updateQuestionairesById(questionnaireBody: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}users-questionnaires/update_new_attempt/`, questionnaireBody);
   }
 
   getQuestionairesByPatientId(patientId: string, questionnaireId: string): Observable<any> {

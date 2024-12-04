@@ -4,7 +4,12 @@
   </div>
   <div>
     <div *ngFor="let questionnaire of questionaires" class="patient-info">
-      <p style="margin: 0">{{questionnaire.title}}</p>
+      <div style="display: flex; align-items: center;">
+        <button mat-icon-button matSuffix (click)="seeChart(questionnaire)" style="border: 0;">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <p style="margin: 0">{{questionnaire.title}}</p>
+      </div>
       <div>
         <div *ngIf="questionnaire.done"  style="display: flex; align-items: center">
           <button mat-flat-button (click)="newAttempt(questionnaire.id)" style="margin-right: 10px">Nuevo Intento</button>
