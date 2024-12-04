@@ -12,12 +12,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardPacienteComponent } from './dashboard-paciente/dashboard-paciente.component';
-import { DashboardDoctorComponent } from './dashboard-doctor/dashboard-doctor.component';
 import { ApiService } from './api.service';
 import { AuthGuard } from './auth.guard';
 import { appRoutes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomePacienteComponent } from './home-paciente/home-paciente.component';
 import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
@@ -37,8 +35,6 @@ import {DatePipe} from '@angular/common';
     LoginComponent,
     RegisterComponent,
     DashboardPacienteComponent,
-    DashboardDoctorComponent,
-    HomePacienteComponent,
     HomeDoctorComponent,
     DashboardInfoPacienteComponent,
     QuestionnaireComponent,
